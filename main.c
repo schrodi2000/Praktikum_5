@@ -1,19 +1,33 @@
  #include <stdio.h>
 #include "list.h"
+#include "queue.h"
+
+void listTest(List liste){
+    appendInt(liste, isListEmpty(liste));
+    insertDoubleAt(liste, listLength(liste), 3.33);
+    appendString(liste,"zwei");
+    insertStringAt(liste, 1, getStringAt(liste, 2));
+    removeAt(liste, 3);
+    printList(liste);
+    removeAt(liste, 0);
+    insertIntAt(liste, 0, (int)isListEmpty(liste)+4);
+    printDataAt(liste, 0);
+}
+void queueTest(Queue queue){
+    addChar(queue, 'I');
+    addInt(queue, queueLength(queue)+1);
+    printQueue(queue);
+    addChar(queue, getChar(queue));
+    printf("\n");
+    printQueue(queue);
+
+}
+
 int main() {
     List liste = createList();
-    appendChar(liste, 'A');
-    printList(liste);
-    /*
-    List liste = createList();
-    insertIntAt(liste, 0, 3);
-    insertDoubleAt(liste, 0, 1.1);
-    insertFloatAt(liste, 1, 2.1f);
-    printf("length: %i\n", listLength(liste));
-    printf("0 : %f \n", getDoubleAt(liste,0));
-    printf("1 : %f \n", getFloatAt(liste,1));
-    printf("2 : %d \n", getIntAt(liste,2));
-    printList(liste);
-    deleteList(liste);*/
+    Queue queue = createQueue();
+    listTest(liste);
+    printf("\n---\n");
+    queueTest(queue);
     return 0;
 }

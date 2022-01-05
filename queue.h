@@ -1,6 +1,3 @@
-//
-// Created by schro on 05.01.2022.
-//
 
 #ifndef UNTITLED_QUEUE_H
 #define UNTITLED_QUEUE_H
@@ -27,4 +24,4 @@ int getInt(Queue head);
 
 const char* getString(Queue head);
 
-#endif //UNTITLED_QUEUE_H
+#endif

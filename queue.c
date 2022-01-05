@@ -2,9 +2,6 @@
 #include "queue.h"
 #include "stdlib.h"
 
-//
-// Created by schro on 05.01.2022.
-//
 struct queue_struct {
     List liste;
 };
