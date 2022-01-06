@@ -29,5 +29,8 @@ int main() {
     listTest(liste);
     printf("\n---\n");
     queueTest(queue);
+
+	deleteList(liste);
+	deleteQueue(queue);
     return 0;
 }
