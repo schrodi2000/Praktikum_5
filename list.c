@@ -8,7 +8,7 @@ typedef union value {
     int INT;
     float FLOAT;
     double DOUBLE;
-    const char *STRING;
+    const char* STRING;
 } Data;         /* Datum eines belibigen Datentyps. */
 typedef enum datentyp_enum {
     CHAR,
@@ -26,7 +26,7 @@ struct list_struct {
 };
 
 void isIndexCorrect(List head, int index) {
-    if (index < 0 || index > listLength(head)){
+    if (index < 0 || index > listLength(head)) {
         printf("Index is incorrect");
         exit(-2);
     }
@@ -113,20 +113,19 @@ List createList() {
 
 void deleteList(List head) {
     List next;
-    while (head->next != NULL) {
+    while (head != NULL) {
         next = head->next;
         free(head);
         head = next;
     }
-    free(head);
 }
 
 List removeAt(List head, int index) {
-    List next = createList();
+    List next;
     isIndexCorrect(head, index);
     if (index > 0) {
         List jetziger = head;
-        List vorheriger = createList();
+        List vorheriger = index ? NULL : createList();
         while (index) {
             vorheriger = jetziger;
             jetziger = jetziger->next;
@@ -168,6 +167,7 @@ List insert(List head, int index) {
         }
         return new;
     }
+    free(new);
     return head;
 }       /* gleichbleibender teil der insert Funktionen */
 
@@ -183,6 +183,7 @@ List insertIntAt(List head, int index, int value) {
         head->next = new;
         *new = *test;
     }
+    free(test);
     return head;
 }
 
@@ -198,6 +199,7 @@ List insertCharAt(List head, int index, char value) {
         head->next = new;
         *new = *test;
     }
+    free(test);
     return head;
 }
 
@@ -213,6 +215,7 @@ List insertLongAt(List head, int index, long value) {
         head->next = new;
         *new = *test;
     }
+    free(test);
     return head;
 }
 
@@ -228,6 +231,7 @@ List insertFloatAt(List head, int index, float value) {
         head->next = new;
         *new = *test;
     }
+    free(test);
     return head;
 }
 
@@ -243,10 +247,11 @@ List insertDoubleAt(List head, int index, double value) {
         head->next = new;
         *new = *test;
     }
+    free(test);
     return head;
 }
 
-List insertStringAt(List head, int index, const char *value) {
+List insertStringAt(List head, int index, const char* value) {
     List new, test;
     test = createList();
     new = insert(head, index);
@@ -258,6 +263,7 @@ List insertStringAt(List head, int index, const char *value) {
         head->next = new;
         *new = *test;
     }
+    free(test);
     return head;
 }
 
@@ -296,7 +302,7 @@ List appendDouble(List head, double value) {
     return head;
 }
 
-List appendString(List head, const char *value) {
+List appendString(List head, const char* value) {
     List new = insert(head, listLength(head));
     new->type = STRING;
     new->value.STRING = value;
@@ -317,7 +323,7 @@ List get(List head, int index) {
 
 char getCharAt(List head, int index) {
     head = get(head, index);
-    if (head->type != CHAR){
+    if (head->type != CHAR) {
         printf("wrong Datatype.");
         exit(-3);
     }
@@ -326,7 +332,7 @@ char getCharAt(List head, int index) {
 
 int getIntAt(List head, int index) {
     head = get(head, index);
-    if (head->type != INT){
+    if (head->type != INT) {
         printf("wrong Datatype.");
         exit(-3);
     }
@@ -335,7 +341,7 @@ int getIntAt(List head, int index) {
 
 long getLongtAt(List head, int index) {
     head = get(head, index);
-    if (head->type != LONG){
+    if (head->type != LONG) {
         printf("wrong Datatype.");
         exit(-3);
     }
@@ -344,7 +350,7 @@ long getLongtAt(List head, int index) {
 
 float getFloatAt(List head, int index) {
     head = get(head, index);
-    if (head->type != FLOAT){
+    if (head->type != FLOAT) {
         printf("wrong Datatype.");
         exit(-3);
     }
@@ -353,16 +359,16 @@ float getFloatAt(List head, int index) {
 
 double getDoubleAt(List head, int index) {
     head = get(head, index);
-    if (head->type != DOUBLE){
+    if (head->type != DOUBLE) {
         printf("wrong Datatype.");
         exit(-3);
     }
     return head->value.DOUBLE;
 }
 
-const char *getStringAt(List head, int index) {
+const char* getStringAt(List head, int index) {
     head = get(head, index);
-    if (head->type != STRING){
+    if (head->type != STRING) {
         printf("wrong Datatype.");
         exit(-3);
     }
